@@ -84,12 +84,18 @@ let loginUser = async (req, res) => {
     }
 }
 
+let PrivateAccess = async(req , res)=>{
+    res.json({
+        message : `req is made by ${req.user.name}`
+    })
+}
+
 
 let generateToken = (id)=>{
     let token = jwt.sign({id} , process.env.JWT_SECRET , {expiresIn : '30d'})
     return token
 }
 
-let authController = { registerUser, loginUser }
+let authController = { registerUser, loginUser , PrivateAccess }
 
 export default authController
