@@ -8,6 +8,6 @@ router.post("/register",authController.registerUser)
 
 router.post("/login" , authController.loginUser)
 
-router.post("/private" ,protect , authController.PrivateAccess)
+router.post("/private" ,protect.forAuthUsers , authController.PrivateAccess)
 
 export default router

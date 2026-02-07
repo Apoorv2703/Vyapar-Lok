@@ -4,6 +4,8 @@ import connectDb from "./config/dbConfig.js"
 //local imports
 import authRoutes from "./Router/authRouter.js"
 import adminRoutes from "./Router/adminRoutes.js"
+import shopOwnerRoutes from "./Router/shopOwnerRoutes.js"
+
 import { errorHandler } from "./middleware/errorHandler.js"
 
 
@@ -27,5 +29,6 @@ app.use(express.urlencoded())
 
 app.use("/api/auth" , authRoutes)
 app.use("/api/admin" , adminRoutes)
+app.use("/api/shop-owner" , shopOwnerRoutes )
 
 app.use(errorHandler)

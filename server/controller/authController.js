@@ -23,6 +23,12 @@ let registerUser = async (req, res) => {
 
     }
 
+    if (phone.length !== 10) {
+        res.status(409)
+        throw new Error("Please enter valid Phone.No");
+
+    }
+
     //hash password
 
     let salt = bcrypt.genSaltSync(10)
@@ -51,7 +57,7 @@ let registerUser = async (req, res) => {
         password: user.password,
         phone: user.phone,
         address: user.address,
-        token : generateToken(user._id)
+        token: generateToken(user._id)
     })
 }
 
@@ -64,38 +70,38 @@ let loginUser = async (req, res) => {
 
     }
 
-    let user = await User.findOne({email})
+    let user = await User.findOne({ email })
 
     //check password
 
-    if(user && await bcrypt.compare(password , user.password)){
+    if (user && await bcrypt.compare(password, user.password)) {
         res.status(200).json({
-            _id : user._id ,
-            name : user.name ,
-            email : user.email ,
-            password : user.password ,
-            token : generateToken(user._id)
-            
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            password: user.password,
+            token: generateToken(user._id)
+
         })
-    }else{
+    } else {
         res.status(400)
         throw new Error("Invalid Credentials");
-        
+
     }
 }
 
-let PrivateAccess = async(req , res)=>{
+let PrivateAccess = async (req, res) => {
     res.json({
-        message : `req is made by ${req.user.name}`
+        message: `req is made by ${req.user.name}`
     })
 }
 
 
-let generateToken = (id)=>{
-    let token = jwt.sign({id} , process.env.JWT_SECRET , {expiresIn : '30d'})
+let generateToken = (id) => {
+    let token = jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' })
     return token
 }
 
-let authController = { registerUser, loginUser , PrivateAccess }
+let authController = { registerUser, loginUser, PrivateAccess }
 
 export default authController

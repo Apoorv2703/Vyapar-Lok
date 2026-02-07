@@ -38,7 +38,7 @@ let userSchema = new mongoose.Schema({
     },
     isShopOwner: {
         type: Boolean,
-        default: true,
+        default: false,
         required: true
     },
     isAdmin: {
