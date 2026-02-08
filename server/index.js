@@ -5,6 +5,9 @@ import connectDb from "./config/dbConfig.js"
 import authRoutes from "./Router/authRouter.js"
 import adminRoutes from "./Router/adminRoutes.js"
 import shopOwnerRoutes from "./Router/shopOwnerRoutes.js"
+import productsRoutes from './Router/productRoutes.js'
+import cartRoutes from './Router/cartRoutes.js'
+import orderRoutes from './Router/orderRoutes.js'
 
 import { errorHandler } from "./middleware/errorHandler.js"
 
@@ -30,5 +33,8 @@ app.use(express.urlencoded())
 app.use("/api/auth" , authRoutes)
 app.use("/api/admin" , adminRoutes)
 app.use("/api/shop-owner" , shopOwnerRoutes )
+app.use("/api/products" , productsRoutes )
+app.use("/api/cart" , cartRoutes)
+app.use("/api/orders" , orderRoutes )
 
 app.use(errorHandler)
