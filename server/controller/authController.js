@@ -80,6 +80,7 @@ let loginUser = async (req, res) => {
             name: user.name,
             email: user.email,
             password: user.password,
+            isActive : user.isActive ,
             token: generateToken(user._id)
 
         })
