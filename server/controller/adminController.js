@@ -1,4 +1,5 @@
 import Order from "../Model/orderModel.js";
+import Shop from "../Model/shopModel.js";
 import User from "../Model/userModel.js"
 
 let getUsers = async (req, res) => {
@@ -51,10 +52,41 @@ let updateShop = async (req, res) => {
     res.send("shop updated")
 }
 
-let createShop = async (req, res) => {
-    res.send("shop created")
+let getAllShops = async(req, res) =>{
+    let shops = await Shop.find()
+
+    
+
+    if(!shops){
+        res.status(404)
+        throw new Error("Shop not Found");
+        
+    }
+
+    res.status(200).json(shops)
 }
 
-let adminControllers = { getUsers, getAllOrders, updateUser, updateShop, createShop }
+let createShop = async (req, res) => {
+
+    if(!req.body.status){
+        res.status(409)
+        throw new Error("Please tell the status");
+        
+    }
+
+    let shopId = req.params.sid 
+
+    let updateShop = await Shop.findByIdAndUpdate(shopId , req.body.status , {new : true})
+
+    if(!updateShop){
+        res.status(409)
+        throw new Error("Shop cannot be active");
+        
+    }
+
+    res.status(200).json(updateShop)
+}
+
+let adminControllers = { getUsers, getAllOrders, updateUser, updateShop, createShop , getAllShops }
 
 export default adminControllers

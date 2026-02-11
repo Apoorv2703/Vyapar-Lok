@@ -19,7 +19,10 @@ router.get("/orders" , protect.forAdmin , adminControllers.getAllOrders)
 router.put("/shops/:sid" , protect.forAdmin , adminControllers.updateShop)
 
 //create Shop
-router.post("/shops" , protect.forAdmin , adminControllers.createShop)
+router.post("/shops/:sid" , protect.forAdmin , adminControllers.createShop)
+
+//get All Shops
+router.get("/shops" , protect.forAdmin , adminControllers.getAllShops)
 
 router
 
