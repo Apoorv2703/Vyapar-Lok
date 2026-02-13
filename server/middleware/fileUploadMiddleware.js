@@ -1,4 +1,5 @@
-const multer = require("multer");
+import multer from "multer";
+import crypto from "crypto";
 
 let storage = multer.diskStorage({
     destination : (req , file , cb)=>{
@@ -13,4 +14,4 @@ let storage = multer.diskStorage({
 
 let upload = multer({storage : storage})
 
-module.exports = upload
+export default upload

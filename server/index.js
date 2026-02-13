@@ -8,6 +8,7 @@ import shopOwnerRoutes from "./Router/shopOwnerRoutes.js"
 import productsRoutes from './Router/productRoutes.js'
 import cartRoutes from './Router/cartRoutes.js'
 import orderRoutes from './Router/orderRoutes.js'
+import shopRoutes from './Router/shopRoutes.js'
 
 import { errorHandler } from "./middleware/errorHandler.js"
 
@@ -36,5 +37,6 @@ app.use("/api/shop-owner" , shopOwnerRoutes )
 app.use("/api/products" , productsRoutes )
 app.use("/api/cart" , cartRoutes)
 app.use("/api/orders" , orderRoutes )
+app.use("/api/shops" , shopRoutes )
 
 app.use(errorHandler)

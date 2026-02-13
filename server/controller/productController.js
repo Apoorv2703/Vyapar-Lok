@@ -1,7 +1,7 @@
 import Product from "../Model/productModel.js"
 
 let getProducts = async (req, res) => {
-    let products = await Product.find()
+    let products = await Product.find().populate('shop')
     if (!products) {
         res.status(404)
         throw new Error("Products Not Found");
@@ -13,7 +13,7 @@ let getProducts = async (req, res) => {
 }
 
 let getProduct = async (req, res) => {
-    let singleProduct = await Product.findById(req.params.pid)
+    let singleProduct = await Product.findById(req.params.pid).populate('shop')
 
     if (!singleProduct) {
         res.status(404)

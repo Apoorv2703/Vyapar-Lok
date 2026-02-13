@@ -1,11 +1,12 @@
 import express from "express"
 import shopOwnerController from "../controller/shopOwnersControllers.js"
 import protect from "../middleware/authMiddleware.js"
+import upload from "../middleware/fileUploadmiddleware.js"
 
 let router = express.Router()
 
 //add Product
-router.post("/add-product" ,protect.forAuthUsers , shopOwnerController.addShop)
+router.post("/add-product" ,protect.forAuthUsers , upload.single('productImage') , shopOwnerController.addProduct)
 
 //addShop
 router.post("/create-shop" ,protect.forAuthUsers , shopOwnerController.addShop)

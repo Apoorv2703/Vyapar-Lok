@@ -48,9 +48,7 @@ let updateUser = async (req, res) => {
 
 }
 
-let updateShop = async (req, res) => {
-    res.send("shop updated")
-}
+
 
 let getAllShops = async(req, res) =>{
     let shops = await Shop.find()
@@ -66,7 +64,7 @@ let getAllShops = async(req, res) =>{
     res.status(200).json(shops)
 }
 
-let createShop = async (req, res) => {
+let updateShop = async (req, res) => {
 
     if(!req.body.status){
         res.status(409)
@@ -76,7 +74,7 @@ let createShop = async (req, res) => {
 
     let shopId = req.params.sid 
 
-    let updateShop = await Shop.findByIdAndUpdate(shopId , req.body.status , {new : true})
+    let updateShop = await Shop.findByIdAndUpdate(shopId , req.body , {new : true})
 
     if(!updateShop){
         res.status(409)
@@ -87,6 +85,6 @@ let createShop = async (req, res) => {
     res.status(200).json(updateShop)
 }
 
-let adminControllers = { getUsers, getAllOrders, updateUser, updateShop, createShop , getAllShops }
+let adminControllers = { getUsers, getAllOrders, updateUser, updateShop, getAllShops }
 
 export default adminControllers
